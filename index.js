@@ -2,11 +2,11 @@ var WebSocketServer = require('ws').Server;
 var http = require('http');
 var express = require('express');
 var app = express();
+var port = process.env.PORT || 5000;
 
 //////////////////////
-// setting http server
-
-app.set('port', (process.env.PORT || 5000));
+// setting http
+app.set('port', port);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
@@ -14,19 +14,20 @@ app.get('/', function(req, res) {
 	res.render('index.jade');
 });
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'));
-});
+var server = http.createServer(app);
+server.listen(port);
+console.log("Node app is running at localhost:" + app.get('port'));
+
 
 ///////////////////
-// setting ws server
+// setting ws
 
-var wss = new WebSocketServer({server:http.createServer(app)});
+var wss = new WebSocketServer({server:server});
 console.log("websocket server created");
 
 wss.on('connection', function(ws) {
 	var sendTimeTask = setInterval(function() {
-		ws.send(JSON.stringify(new Date(), function() {}));
+		ws.send(JSON.stringify(new Date()), function() {});
 	}, 1000);
 
 	console.log('websocket connection open');
