@@ -1,9 +1,18 @@
 .mail-input {
   display: table;
+  width: 30%;
   input {
     display: table-cell;
+    height: 30px;
+    width: 100%;
+    margin-right: 0;
   }
   button {
     display: table-cell;
+    height: 30px;
+    width: 30px;
+    margin-left: 0;
+    border-radius: 0 10px 10px 0;
+    background-color: #999;
   }
 }
