@@ -7,22 +7,23 @@ var port = process.env.PORT || 5000;
 //////////////////////
 // setting http
 app.use(express.static(__dirname + '/public'));
+app.set("views", "src-back");
 
 // root画面
 app.get('/', function(req, res) {
-	res.render('root.jade');
+	res.render('jade/root.jade');
 });
 // チャット画面
 app.get('/chat', function(req, res) {
-	res.render('chat.jade');
+	res.render('jade/chat.jade');
 });
 // 回答画面
 app.get('/answer', function(req, res) {
-	res.render('answer.jade');
+	res.render('jade/answer.jade');
 });
 // css3画面
 app.get('/css3', function(req, res) {
-	res.render('css3.jade');
+	res.render('jade/css3.jade');
 });
 
 // 出題画面
