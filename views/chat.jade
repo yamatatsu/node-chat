@@ -2,7 +2,7 @@ doctype html
 html(lang="ja")
 	head
 	body
-		p Hello World! this is wrote with JADE!
+		h1 easy chat
 		input(type="text",id="message")
 		button(type="button",id="submit") submit
 		ul(id="messageList")
@@ -10,23 +10,18 @@ html(lang="ja")
 		script(type='text/javascript').
 			var host = location.origin.replace(/^http/, 'ws')
 			var ws = new WebSocket(host);
-			// clientごとに振られるid
-			var userId;
 			// ws受信
 			ws.onmessage = function(event) {
 				var data = JSON.parse(event.data);
 				switch (data.type) {
-					// id付与
-					case 'userId':
-						userId = data.userId;
-						break;
 					// メッセージ
 					case 'message':
-						// リスト表示
+						// 表示文字列作成
 						var line = ""; 
 						line += data.time + ": ";
 						line += data.userId + ": ";
 						line += data.message;
+						// リスト表示
 						$('#messageList').append('<li>' + line + '</li>');
 						// 流れる文字
 						var screenWidth = document.screen.width;
@@ -46,11 +41,11 @@ html(lang="ja")
 			// submitボタン押下
 			$('#submit').on('click', function() {
 				var message = $('#message').val();
-				if (message.length <= 50) {
-					ws.send(JSON.stringify({
-						type: 'message',
-						userId: userId,
-						message: message
-					}));
+				if (message.length > 50) {
+					return;
 				}
+				ws.send(JSON.stringify({
+					type: 'message',
+					message: message
+				}));
 			});

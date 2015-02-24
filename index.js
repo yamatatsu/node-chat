@@ -8,9 +8,24 @@ var port = process.env.PORT || 5000;
 // setting http
 app.use(express.static(__dirname + '/public'));
 
+// root画面
 app.get('/', function(req, res) {
-	res.render('index.jade');
+	res.render('root.jade');
 });
+// チャット画面
+app.get('/chat', function(req, res) {
+	res.render('chat.jade');
+});
+// 回答画面
+app.get('/answer', function(req, res) {
+	res.render('answer.jade');
+});
+// css3画面
+app.get('/css3', function(req, res) {
+	res.render('css3.jade');
+});
+
+// 出題画面
 
 var server = http.createServer(app);
 server.listen(port);
@@ -22,27 +37,26 @@ console.log("Node app is running at localhost:" + port);
 var wss = new WebSocketServer({server:server});
 console.log("websocket server created");
 
-var userId = 1;
+var userIdCounter = 1;
+var userIdMapper = {};
 
 // 接続開始
 wss.on('connection', function(ws) {
 	console.log('websocket connection open');
 
 	// clientに対してuserIdを振る
-	ws.send(JSON.stringify({
-		type: 'userId',
-		userId: userId
-	}));
-	userId++;
+	userIdMapper[ws] = userIdCounter; // TODO hash の触り方わすれた
+	userIdCounter++;
 
 	/**
 	 * ws受信時
-	 * メッセージを受けたら、時間を付与して、接続している全員にsend
+	 * メッセージを受けたら、時間とuserIdを付与して、接続している全員にsend
 	 */
 	ws.on('message', function(json) {
 		console.log('message is ' + json);
 		var data = JSON.parse(json);
 		data.time = new Date();
+		data.userId = userIdMapper[ws]; // TODO test not yet
 		wss.clients.forEach(function(client) {
 			client.send(JSON.stringify(data));
 		});
