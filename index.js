@@ -7,7 +7,7 @@ var port = process.env.PORT || 5000;
 //////////////////////
 // setting http
 app.use(express.static(__dirname + '/public'));
-app.set("views", "src-back");
+app.set("views", ".tmp-back");
 
 // root画面
 app.get('/', function(req, res) {
