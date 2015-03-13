@@ -25,6 +25,10 @@ app.get('/answer', function(req, res) {
 app.get('/css3', function(req, res) {
 	res.render('jade/css3.jade');
 });
+// bbbb画面
+app.get('/bbbb', function(req, res) {
+	res.render('jade/bbbb.jade');
+});
 
 // 出題画面
 
