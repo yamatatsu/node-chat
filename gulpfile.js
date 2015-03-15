@@ -7,7 +7,7 @@ var babel = require('gulp-babel');
 gulp.task('sass', function () {
 	return gulp.src('./src-front/scss/*')
 		.pipe(sass())
-		.pipe(gulp.dest('./public/css'));
+		.pipe(gulp.dest('./build/public/css'));
 });
 
 gulp.task('lint', function() {
@@ -23,7 +23,7 @@ gulp.task('js-build', function() {
 			debug : !gulp.env.production
 		}))
 		//.pipe(babel())
-		.pipe(gulp.dest('./public/js'));
+		.pipe(gulp.dest('./build/public/js'));
 
 });
 
