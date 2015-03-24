@@ -14,8 +14,11 @@
     "gulp": "^3.8.11",
     "gulp-sass": "^1.3.x",
     "gulp-jshint": "1.9.x",
-    "gulp-browserify": "0.5.x",
-    "gulp-babel": "4.0.x"
+    "del": "1.1.x",
+    "browserify": "8.0.1",
+    "babelify": "5.0.x",
+    "vinyl-transform": "1.0.x",
+    "underscore": "1.8.x"
   },
   "engines": {
     "node": "0.10.x"
