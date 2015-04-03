@@ -4,13 +4,18 @@ import {Model} from './backbone/Model';
 
 class Person extends Model {
     constructor(attrs) {
-        super(attrs);
+        var options = {
+          defaults: {
+            country: 'Japan',
+            eyes: 'black'
+          }
+        };
+        super(attrs, options);
+        this.on('change:name', args => console.log('change name '+args.old+' to '+args.new));
+        this.on('change', args => console.log('change model '+JSON.stringify(args.old)+' to '+JSON.stringify(args.new)));
     }
 }
 
 var tatsuya = new Person({name: 'tatsuya', age: 29});
-tatsuya.set('country', 'japan');
-
-console.log(tatsuya.get('name'));
-console.log(tatsuya.get('age'));
-console.log(tatsuya.get('country'));
+tatsuya.set('country', 'Japan');
+tatsuya.set('name', 'tatsuya2');

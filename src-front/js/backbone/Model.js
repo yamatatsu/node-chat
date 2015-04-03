@@ -1,8 +1,13 @@
-var _ = require('./Model.js');
+import {Events} from './Events';
 
-export class Model {
-    constructor(attrs = {}) {
+var _ = require('underscore');
+
+export class Model extends Events {
+    constructor(attrs = {}, options = {}) {
         this.attributes = {};
+        if (options.defaults) {
+          attrs = _.defaults({}, attrs, options.defaults);
+        }
         this.set(attrs);
     }
 
@@ -14,6 +19,7 @@ export class Model {
         if (key == null) {
             return this;
         }
+        var old = _.clone(this);
         var attrs;
         if (typeof key === 'object') {
             attrs = key;
@@ -21,9 +27,13 @@ export class Model {
             attrs = {};
             attrs[key] = val;
         }
-        for (var attr in attrs) {
-            this.attributes[attr] = attrs[attr];
-        }
+        _.each(attrs, (v, k) => {
+            if (!_.isEqual(this.attributes[k], v)) {
+                this.trigger('change:' + k, {new: v, old: this.attributes[k]});
+            }
+            this.attributes[k] = v;
+        });
+        this.trigger('change', {new: this, old: old});
         return this;
     }
 
