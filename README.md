@@ -1,16 +1,24 @@
-いろんな勉強オールインワン
- *** doing
-node.js
-websocket
-jade
-css3
-gulp
-sass
-es6
-backbone
+# いろんな勉強オールインワン
 
- *** not yet
-react
-jquery
-underscore
-vanilla
+## break
+- node.js
+- websocket
+- jade
+- css3
+- sass
+
+## doing
+- gulp
+- brouserlify
+- babelify
+- CommonJS
+- es6
+- backbone
+- vanilla.js
+
+## not yet
+- react
+- jquery
+- underscore
+- MongoDB
+- RESTful API
