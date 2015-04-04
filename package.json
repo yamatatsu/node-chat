@@ -12,12 +12,13 @@
     "ws": "0.4.x",
     "jade": "1.9.x",
     "gulp": "^3.8.11",
+    "gulp-nodemon": "2.0.x",
     "gulp-sass": "^1.3.x",
-    "gulp-jshint": "1.9.x",
     "del": "1.1.x",
     "browserify": "8.0.1",
     "babelify": "5.0.x",
     "vinyl-transform": "1.0.x",
+    "run-sequence": "1.0.x",
     "underscore": "1.8.x"
   },
   "engines": {

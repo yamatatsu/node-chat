@@ -1,24 +1,22 @@
 var gulp = require('gulp');
+
+////////////////////
+// front
 var sass = require('gulp-sass');
-//var jshint = require('gulp-jshint');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var vinylTransform = require('vinyl-transform');
 var del = require('del');
+var runSequence = require('run-sequence');
 
-gulp.task('lint', function() {
-	//return gulp.src('./src-front/js/*')
-	//	.pipe(jshint())
-	//	.pipe(jshint.reporter('default'));
-});
-
+// 削除してくれる人
 gulp.task('clean', function(cb) {
-	return del(['build/*'], cb);
+	del(['build/*'], cb);
 });
 
-
-gulp.task('js-build', function() {
-	return gulp.src("./src-front/js/*.js")
+// jsを作ってくれる人(browserify, babelify)
+gulp.task('js', function() {
+	gulp.src('./src-front/js/*.js')
 		.pipe(vinylTransform(function(filename){
 			return browserify(filename)
 				.transform(babelify)
@@ -26,20 +24,41 @@ gulp.task('js-build', function() {
 		}))
 		.pipe(gulp.dest('./build/public/js'));
 });
-
-gulp.task('css-build', function () {
-	return gulp.src('./src-front/scss/*')
+// cssを作ってくれる人(sass)
+gulp.task('css', function () {
+	gulp.src('./src-front/scss/**/*.sass')
 		.pipe(sass())
 		.pipe(gulp.dest('./build/public/css'));
 });
 
-gulp.task(
-	'default',
-	[
-		'lint',
-		'clean',
-		'js-build',
-		'css-build'
-	],
-	function() {console.log('done!!');}
-);
+// 監視→ビルドしてくれる人
+gulp.task('watch', function() {
+	gulp.watch('./src-front/js/**/*.js', ['js']);
+	gulp.watch('./src-front/scss/**/*.sass', ['css']);
+});
+
+// ビルド。heroku用
+gulp.task('deploy', function(callback) {
+  return runSequence(
+    'clean',
+    ['js', 'css'],
+    callback
+  );
+});
+
+// ビルドしつつ監視
+gulp.task('default', function(callback) {
+  return runSequence(
+    'deploy',
+    'watch',
+    callback
+  );
+});
+
+////////////////////
+// server
+var nodemon = require('gulp-nodemon');
+gulp.task('serve', function() {
+  nodemon({script: 'index.js'})
+		.on('restart', function(){console.log('restarted!')});
+});
