@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "postinstall": "node node_modules/.bin/gulp"
+    "postinstall": "node node_modules/.bin/gulp deploy"
   },
   "dependencies": {
     "express": "~4.9.x",
