@@ -3,13 +3,14 @@ import {View} from './backbone/View';
 
 class Person extends Model {
   constructor(attrs) {
-    this.defaults = {
+    super({
       country: 'Japan',
       eyes: 'black'
-    };
-    super(attrs);
-    this.on('change:name', args => console.log('change name '+args.old+' to '+args.new));
-    this.on('change', args => console.log('change model '+JSON.stringify(args.old)+' to '+JSON.stringify(args.new)));
+    });
+    super
+      .set(attrs)
+      .on('change:name', args => console.log('change name '+args.old+' to '+args.new))
+      .on('change', args => console.log('change model '+JSON.stringify(args.old)+' to '+JSON.stringify(args.new)));
   }
 }
 

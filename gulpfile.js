@@ -8,6 +8,7 @@ var babelify = require('babelify');
 var vinylTransform = require('vinyl-transform');
 var del = require('del');
 var runSequence = require('run-sequence');
+var plumber = require('gulp-plumber');
 
 // 削除してくれる人
 gulp.task('clean', function(cb) {
@@ -17,6 +18,7 @@ gulp.task('clean', function(cb) {
 // jsを作ってくれる人(browserify, babelify)
 gulp.task('js', function() {
 	gulp.src('./src-front/js/*.js')
+		.pipe(plumber())
 		.pipe(vinylTransform(function(filename){
 			return browserify(filename)
 				.transform(babelify)
@@ -27,6 +29,7 @@ gulp.task('js', function() {
 // cssを作ってくれる人(sass)
 gulp.task('css', function () {
 	gulp.src('./src-front/scss/**/*.sass')
+		.pipe(plumber())
 		.pipe(sass())
 		.pipe(gulp.dest('./build/public/css'));
 });
