@@ -19,7 +19,8 @@
     "babelify": "5.0.x",
     "vinyl-transform": "1.0.x",
     "run-sequence": "1.0.x",
-    "underscore": "1.8.x"
+    "underscore": "1.8.x",
+    "jquery-browserify": "1.8.x"
   },
   "engines": {
     "node": "0.10.x"

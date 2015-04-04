@@ -3,10 +3,10 @@ import {Events} from './Events';
 var _ = require('underscore');
 
 export class Model extends Events {
-    constructor(attrs = {}, options = {}) {
+    constructor(attrs = {}) {
         this.attributes = {};
-        if (options.defaults) {
-          attrs = _.defaults({}, attrs, options.defaults);
+        if (this.defaults) {
+          attrs = _.defaults({}, attrs, this.defaults);
         }
         this.set(attrs);
     }
