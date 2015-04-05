@@ -1,6 +1,8 @@
 import {Model} from './backbone/Model';
 import {View} from './backbone/View';
 
+/////////////
+// Model
 class Person extends Model {
   constructor(attrs) {
     super({
@@ -18,6 +20,9 @@ var tatsuya = new Person({name: 'tatsuya', age: 29});
 tatsuya.set('country', 'Japan');
 tatsuya.set('name', 'tatsuya2');
 
+
+//////////////
+// View
 class SearchView extends View {
   constructor(el) {
     super(el);

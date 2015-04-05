@@ -15,10 +15,10 @@
 - es6
 - backbone
 - vanilla.js
+- RESTful API
 
 ## not yet
 - react
 - jquery
 - underscore
 - MongoDB
-- RESTful API
