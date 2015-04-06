@@ -8,7 +8,7 @@
     "postinstall": "node node_modules/.bin/gulp deploy"
   },
   "dependencies": {
-    "express": "~4.9.x",
+    "express": "4.9.x",
     "ws": "0.4.x",
     "jade": "1.9.x",
     "gulp": "^3.8.11",
@@ -24,7 +24,7 @@
     "jquery-browserify": "1.8.x"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "0.11.x"
   },
   "repository": {
     "type": "git",

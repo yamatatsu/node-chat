@@ -31,6 +31,9 @@ app.get('/bbbb', function(req, res) {
 	res.render('jade/bbbb.jade');
 });
 
+// RESTful
+app.use('/api/user', require('./src-back/api/user.js'))
+
 // 出題画面
 
 var server = http.createServer(app);
