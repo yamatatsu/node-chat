@@ -4,34 +4,36 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.json({
     user: [
-      {id: 1, name: 'チョッパー'},
-      {id: 2, name: 'Dr.クレハ'}
+      {userId: 1, userName: 'チョッパー'},
+      {userId: 2, userName: 'Dr.クレハ'}
     ]
   });
 });
 
 router.get('/:id', function(req, res, next) {
   res.json({
-    user: {id: 1, name: 'チョッパー'}
+    user: {userId: 1, userName: 'チョッパー'}
   });
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
+  console.log(req.params);
   res.json({
-    user: {id: 3, name: 'ラブーン'}
+    user: {userId: 3, userName: 'ラブーン'}
   })
 });
 
 router.put('/:id', function(req, res, next) {
+  console.log(req.params);
   res.json({
-    user: {id: 1, name: 'トニートニー・チョッパー'}
+    user: {userId: 1, userName: 'トニートニー・チョッパー'}
   });
 });
 
 router.delete('/:id', function(req, res, next) {
+  console.log(req.params);
   res.json({
-    user: {id: 2, name: 'Dr.クレハ'}
+    user: {userId: 2, userName: 'Dr.クレハ'}
   });
 });
 

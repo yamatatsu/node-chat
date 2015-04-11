@@ -4,8 +4,10 @@
 - node.js
 - websocket
 - jade
+- RESTful API
 - css3
 - sass
+- backbone
 
 ## doing
 - gulp
@@ -13,12 +15,10 @@
 - babelify
 - CommonJS
 - es6
-- backbone
+- react
 - vanilla.js
-- RESTful API
 
 ## not yet
-- react
 - jquery
 - underscore
 - MongoDB

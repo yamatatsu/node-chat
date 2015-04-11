@@ -1,11 +1,16 @@
 import {Events} from './Events';
 
+var $ = require('jquery-browserify');
 var _ = require('underscore');
 
 export class Model extends Events {
-  constructor(defaults) {
+  constructor(options) {
     this.attributes = {};
-    this.set(defaults);
+    if (options.defaults) {
+      this.set(options.defaults);
+    }
+    this.idAttribute = options.idAttribute || 'id';
+    this.urlRoot = options.urlRoot;
   }
 
   get(attr) {
@@ -32,6 +37,39 @@ export class Model extends Events {
     });
     this.trigger('change', {new: this, old: old});
     return this;
+  }
+
+  save(options) {
+    var type = !this.getId() ? 'POST' : 'PUT';
+    this._sync(type, options.success);
+  }
+
+  destroy(options) {
+    this._sync('DELETE', options.success);
+  }
+
+  _sync(type, success) {
+    if (!this.urlRoot) {
+      return false;
+    }
+
+    var url = this.urlRoot;
+    var id = this.getId();
+    if (id) {
+      url += '/' + id;
+    }
+
+    $.ajax({
+      url: url,
+      type: type,
+      data: this.attributes,
+      dataType: 'json',
+      success: (data) => success(data)
+    });
+  }
+
+  getId() {
+    return this.attributes[this.idAttribute];
   }
 
 }
