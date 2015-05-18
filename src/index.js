@@ -7,34 +7,11 @@ var port = process.env.PORT || 5000;
 //////////////////////
 // setting http
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/build/public'));
-app.set("views", "src-back");
+app.set("views", "src");
 
-// root画面
 app.get('/', function(req, res) {
-	res.render('jade/root.jade');
-});
-// チャット画面
-app.get('/chat', function(req, res) {
 	res.render('jade/chat.jade');
 });
-// 回答画面
-app.get('/answer', function(req, res) {
-	res.render('jade/answer.jade');
-});
-// css3画面
-app.get('/css3', function(req, res) {
-	res.render('jade/css3.jade');
-});
-// bbbb画面
-app.get('/bbbb', function(req, res) {
-	res.render('jade/bbbb.jade');
-});
-
-// RESTful
-app.use('/api/user', require('./src-back/api/user.js'))
-
-// 出題画面
 
 var server = http.createServer(app);
 server.listen(port);
