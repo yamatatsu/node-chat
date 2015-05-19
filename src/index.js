@@ -6,7 +6,7 @@ var port = process.env.PORT || 5000;
 
 //////////////////////
 // setting http
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 app.set("views", "src");
 
 app.get('/', function(req, res) {
