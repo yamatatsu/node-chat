@@ -23,16 +23,16 @@ html(lang="ja")
 						line += data.message;
 						// リスト表示
 						$('#messageList').append('<li>' + line + '</li>');
-						// 流れる文字
-						var screenWidth = document.screen.width;
-						var $flowLabel = $('<p>' + line + '</p>');
-						$flowLabel.css({
-							'top': new Random(),// TODO 書き方
-							'left': screenWidth,
-							'position': 'absolute'
-						});
-						$('body').append($flowLabel);
-						$flowLabel.animate({'left': -$flowLabel.width()});
+						// TODO 流れる文字 
+						//- var screenWidth = document.screen.width;
+						//- var $flowLabel = $('<p>' + line + '</p>');
+						//- $flowLabel.css({
+						//- 	'top': new Random(),// TODO 書き方
+						//- 	'left': screenWidth,
+						//- 	'position': 'absolute'
+						//- });
+						//- $('body').append($flowLabel);
+						//- $flowLabel.animate({'left': -$flowLabel.width()});
 						break;
 					default:
 						break;
