@@ -23,17 +23,13 @@ console.log("Node app is running at localhost:" + port);
 var wss = new WebSocketServer({server:server});
 console.log("websocket server created");
 
-var userIdCounter = 1;
-var userIdMapper = {};
+var connections = [];
 
 // 接続開始
 wss.on('connection', function(ws) {
 	console.log('websocket connection open');
 
-	// clientに対してuserIdを振る
-	userIdMapper[ws] = userIdCounter; // TODO hash の触り方わすれた
-	userIdCounter++;
-
+	connections.push(ws);
 	/**
 	 * ws受信時
 	 * メッセージを受けたら、時間とuserIdを付与して、接続している全員にsend
@@ -41,8 +37,8 @@ wss.on('connection', function(ws) {
 	ws.on('message', function(json) {
 		console.log('message is ' + json);
 		var data = JSON.parse(json);
-		data.time = new Date();
-		data.userId = userIdMapper[ws]; // TODO test not yet
+		data.time = getDatetime();
+		data.userId = connections.indexOf(ws) + 1;
 		wss.clients.forEach(function(client) {
 			client.send(JSON.stringify(data));
 		});
@@ -53,3 +49,12 @@ wss.on('connection', function(ws) {
 		console.log('websocket connection close');
 	});
 });
+
+function getDatetime() {
+	var ret = "";
+	var date = new Date();
+	ret += date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+	ret += " ";
+	ret += date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	return ret;
+}
