@@ -9,7 +9,6 @@
   "dependencies": {
     "express": "4.9.x",
     "ws": "0.4.x",
-    "jade": "1.9.x",
     "gulp": "^3.8.11",
     "gulp-nodemon": "2.0.x",
     "run-sequence": "1.0.x"
